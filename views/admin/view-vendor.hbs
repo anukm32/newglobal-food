@@ -1,0 +1,48 @@
+<section>
+    <div class="container" style="width: 61%;
+    margin-left: 26%;
+    margin-top: 3%;">
+        <div class="row mt-4">
+            <a href="/admin/add-vendor" class="btn btn-success ml-auto">Add-vendors</a>
+           
+        </div>
+        <table class="table mt-5" id="productsTable">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Vendor Name</th>
+      <th scope="col">Place</th>
+      <th scope="col">Category</th>
+      <th scope="col">Login_name</th>
+        <th>Options</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+   {{#each vendors}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.Name}}</td>
+      <td>{{this.Place}}</td>
+      <td>{{this.Category}}</td>
+      <td>{{this.Login_name}}</td>
+    
+      
+      <td>
+         <a href="/admin/edit-vendor/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/delete-vendor/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you wnt to delete ?{{this.Name}}')">Delete</a>
+      </td>
+      </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+<script>
+$(document).ready(function() {
+
+    $('#productsTable').DataTable();
+
+} );
+</script>

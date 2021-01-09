@@ -1,0 +1,56 @@
+<section style="    background-color: lightpink;">
+    <div class="container mt-4">
+        <div class="row" style="margin-top: 7%;">
+            <div class="col-md-6 m-auto">
+                <div class="container mt-5 pl-5">
+                    <h2 class="text-center">Edit Product</h2>
+                    <form action="/vendor/edit-product/{{products._id}}" method="post" enctype="multipart/form-data"
+                        style="width: 27%;margin-left:37%">
+
+                        <div class="form-group">
+                            <label for="">VendorName</label>
+                            <input type="text" name="Vendorname" class="form-control"value="{{products.Vendorname}}" >
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="">ProductName</label>
+                            <input type="text" name="Productname" class="form-control"value="{{products.Productname}}" >
+                        </div>
+
+                          <div class="form-group">
+
+                            <label for="">Category</label>
+                            {{!-- <input type="text" name="Category" class="form-control"value="{{products.Category}}" > --}}
+                            <select class="form-control" name="Category" id="sel1">
+                               
+                                    {{#each categories}}
+                                    <option value="{{this.Categories}}">{{this.Categories}}</option>
+                                   
+                                    {{/each}}
+
+                                </select>
+                        </div>
+
+                          <div class="form-group">
+
+                            <label for="">Price</label>
+                            <input type="number" name="Price" class="form-control"value="{{products.Price}}" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Image</label>
+                            <img src="/product-images/{{products._id}}.jpg" alt="" style="width: 60px;height:auto">
+                            <input type="file" name="Image" class="form-control">
+                        </div>
+
+                         
+                        <button type="submit" class="btn btn-success mt-4">Submit</button>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

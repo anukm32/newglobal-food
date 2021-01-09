@@ -1,0 +1,394 @@
+{{!-- <section>
+  <form action="/otpLogin" id="otplogin" method="POST">
+    <div class="form-group mb-3">
+      <input id="inputmobileno" type="text" placeholder="MOBILE NUMBER" required="true" autofocus=""
+        name="MobileNumber" class="form-control rounded-pill border-0 shadow-sm px-4">
+      <button type="submit" class="btn btn-danger btn-block text-uppercase mb-2 rounded-pill shadow-sm">Send
+        OTP</button>
+    </div>
+  </form>
+
+  <form action="/verifyOtp" id="otplogin" method="POST">
+    <div class="form-group mb-3">
+      <input id="inputmobileno" type="text" placeholder="OTP" required="true" autofocus="" name="otp"
+        class="form-control rounded-pill border-0 shadow-sm px-4">
+      <button type="submit" class="btn btn-danger btn-block text-uppercase mb-2 rounded-pill shadow-sm">LOgin with
+        OTP</button>
+    </div>
+  </form>
+</section>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 m-auto">
+        <div class="container mt-5 pl-5">
+          <h2 class="text-center">Login</h2>
+
+          <form action="/login" style="width: 27%;margin-left:37%" method="post">
+            {{#if loginErr}}
+            <p class="error">Invalide user name or Password</p>
+            {{/if}}
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="email" class="form-control" name="Email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" name="Password" placeholder="Password">
+            </div>
+
+            <a href="/signup">Create a new accont?</a>
+
+            <button type="submit" class="btn btn-primary float-right">Login</button>
+
+
+
+
+
+          </form>
+
+
+
+
+
+
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section> --}}
+
+
+{{!-- <section>
+<div class="row">
+  <div class="col-md-6 mx-auto p-0">
+    <div class="card">
+      <div class="login-box">
+        <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
+            class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2"
+            class="tab">Sign Up</label>
+          <div class="login-space">
+            <div class="login">
+              <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text"
+                  class="input" placeholder="Enter your username"> </div>
+              <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password"
+                  class="input" data-type="password" placeholder="Enter your password"> </div>
+              <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span
+                    class="icon"></span> Keep me Signed in</label> </div>
+              <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
+              <div class="hr"></div>
+              <div class="foot"> <a href="#">Forgot Password?</a> </div> 
+            
+
+              
+
+
+
+
+              
+            </div>
+            <div class="sign-up-form">
+              <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text"
+                  class="input" placeholder="Create your Username" name="Name"> </div>
+              <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="Password"
+                  class="input" data-type="password" placeholder="Create your password"> </div>
+              <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass"
+                  type="Password" class="input" data-type="password" placeholder="Repeat your password"> </div>
+              <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email"
+                  class="input" placeholder="Enter your email address" name="Email"> </div>
+              <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+              <div class="hr"></div>
+              <div class="foot"> <label for="tab-1"> <a href="/login">Already Member?</a></label> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<style>
+  body {
+    margin: 0;
+    color: #6a6f8c;
+    background: #c8c8c8;
+    font: 600 16px/18px 'Open Sans', sans-serif
+}
+.row{
+  margin-right: 0%;
+}
+.login-box {
+    width: 100%;
+    margin: auto;
+    max-width: 525px;
+    min-height: 670px;
+    position: relative;
+    background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
+     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
+}
+
+.login-snip {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 90px 70px 50px 70px;
+    background: rgba(0, 77, 77, .9)
+}
+
+.login-snip .login,
+.login-snip .sign-up-form {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transition: all .4s linear
+}
+.login-snip .sign-in,
+.login-snip .sign-up,
+.login-space .group .check {
+    display: none
+}
+
+.login-snip .tab,
+.login-space .group .label,
+.login-space .group .button {
+    text-transform: uppercase
+}
+
+.login-snip .tab {
+    font-size: 22px;
+    margin-right: 15px;
+    padding-bottom: 5px;
+    margin: 0 15px 10px 0;
+    display: inline-block;
+    border-bottom: 2px solid transparent
+}
+
+.login-snip .sign-in:checked+.tab,
+.login-snip .sign-up:checked+.tab {
+    color: #fff;
+    border-color: #1161ee
+}
+
+.login-space {
+    min-height: 345px;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d
+}
+
+.login-space .group {
+    margin-bottom: 15px
+}
+
+.login-space .group .label,
+.login-space .group .input,
+.login-space .group .button {
+    width: 100%;
+    color: #fff;
+    display: block
+}
+
+.login-space .group .input,
+.login-space .group .button {
+    border: none;
+    padding: 15px 20px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, .1)
+}
+
+.login-space .group input[data-type="password"] {
+    text-security: circle;
+    -webkit-text-security: circle
+}
+
+.login-space .group .label {
+    color: #aaa;
+    font-size: 12px
+}
+
+.login-space .group .button {
+    background: #1161ee
+}
+
+.login-space .group label .icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    background: rgba(255, 255, 255, .1)
+}
+
+.login-space .group label .icon:before,
+.login-space .group label .icon:after {
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    transition: all .2s ease-in-out 0s
+}
+
+.login-space .group label .icon:before {
+    left: 3px;
+    width: 5px;
+    bottom: 6px;
+    transform: scale(0) rotate(0)
+}
+
+.login-space .group label .icon:after {
+    top: 6px;
+    right: 0;
+    transform: scale(0) rotate(0)
+}
+
+.login-space .group .check:checked+label {
+    color: #fff
+}
+
+.login-space .group .check:checked+label .icon {
+    background: #1161ee
+}
+
+.login-space .group .check:checked+label .icon:before {
+    transform: scale(1) rotate(45deg)
+}
+
+.login-space .group .check:checked+label .icon:after {
+    transform: scale(1) rotate(-45deg)
+}
+
+.login-snip .sign-in:checked+.tab+.sign-up+.tab+.login-space .login {
+    transform: rotate(0)
+}
+
+.login-snip .sign-up:checked+.tab+.login-space .sign-up-form {
+    transform: rotate(0)
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: '';
+    display: table
+}
+
+.clearfix:after {
+    clear: both;
+    display: block
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+.hr {
+    height: 2px;
+    margin: 60px 0 50px 0;
+    background: rgba(255, 255, 255, .2)
+}
+
+.foot {
+    text-align: center
+}
+
+.card {
+    width: 500px;
+    left: 100px
+}
+
+::placeholder {
+    color: #b3b3b3
+}
+</style> --}}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords"
+        content="Flat lay login form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <!-- //Meta tag Keywords -->
+
+    <link href="//fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!--/Style-CSS -->
+    <link rel="stylesheet" href="/css2/style.css" type="text/css" media="all" />
+    <!--//Style-CSS -->
+
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- form section start -->
+    <section class="w3l-workinghny-form" style="margin-top:-6%">
+        <!-- /form -->
+        <div class="workinghny-form-grid" > 
+            <div class="wrapper">
+                <div class="logo">
+                    <h1><a class="brand-logo" href="/login">User Login</a></h1>
+                    <!-- if logo is image enable this   
+                        <a class="brand-logo" href="#index.html">
+                            <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                        </a> -->
+                </div>
+                <div class="workinghny-block-grid">
+                    <div class="form-right-inf">
+                       
+                       <div class="login-form-content">
+                            <h2>Login with Email and Password</h2>
+                            <form action="/login" class="signin-form" method="post">
+                             {{#if loginErr}}
+            <p class="error">Invalide user name or Password</p>
+            {{/if}}
+                                <div class="one-frm">
+                                    <label>Email address</label>
+              <input type="email" class="form-control" name="Email" placeholder="Enter email">
+              </div>
+                                <div class="one-frm">
+                                     <label>Password</label>
+              <input type="password" class="form-control" name="Password" placeholder="Password">
+          </div>
+                                <label class="check-remaind">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <p class="remember">Remember Me</p>
+
+                                </label>
+                                <a href="/signup">Create a new accont?</a>
+
+            <button type="submit" class="btn btn-primary float-right">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //form -->
+        <!-- copyright-->
+        
+        <!-- //copyright-->
+    </section>
+    <!-- //form section start -->
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!-- banner -->
+
+<div class="header">
+	<div class="container">
+		<div class="header-left">
+			<div class="w3layouts-logo">
+				<h1>
+					<a href="#"><span>Home chef</span></a>
+				</h1>
+			</div>
+		</div>
+		<div class="header-right">
+			<p><i class="fa fa-map-marker" aria-hidden="true"></i> 123 T.Globel Place,London</p>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="header-bottom">
+	<div class="container">
+		<div class="top-nav">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a class="active list-border" href="#">Vendor</a></li>
+						<li><a href="#">All Products</a></li>
+						<li><a href="/vendor/add-product">Add products</a></li>
+						<li><a href="#">All Orders</a></li>
+						<li class="dropdown">
+
+
+							<a href="#" class="dropdown-toggle" data-hover="Pages" data-toggle="dropdown">
+								{{#if vendor_new}}
+								{{vendor.Name}}
+								{{else}}
+								Account
+								{{/if}}
+
+								<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+
+								{{#if user}}
+								<li><a href="/logout">Logout</a></li>
+								{{else}}
+								<li><a href="/vendor/login">Login</a></li>
+								{{/if}}
+
+
+							</ul>
+
+						</li>
+						
+
+					</ul>
+					<div class="clearfix"> </div>
+				</div>
+			</nav>
+		</div>
+		<!-- w3-banner -->
+
+		<!-- //w3-banner -->
+	</div>
+</div>
+
+<!-- //banner -->
+<!-- welcome -->

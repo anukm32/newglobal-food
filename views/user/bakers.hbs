@@ -1,0 +1,29 @@
+<section>
+    <div class="container">
+        
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Baker Name</th>
+      <th scope="col">Place</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+   {{#each vendors}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.Name}}</td>
+      <td>{{this.Place}}</td>
+     
+      <td>
+         <a href="/user/view-products/{{this._id}}" class="btn btn-primary">Go</a>
+       
+      </td>
+      </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>

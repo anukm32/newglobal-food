@@ -1,0 +1,35 @@
+<section>
+    <div class="container" style="width: 61%;
+    margin-left: 26%;
+    margin-top: 3%;">
+        <div class="row mt-4">
+            <a href="/admin/add-category" class="btn btn-success ml-auto">Add-Category</a>
+           
+        </div>
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Commission</th> 
+     
+      
+    </tr>
+  </thead>
+  <tbody>
+   {{#each categories}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.Categories}}</td>
+      <td>{{this.Commission}}</td>
+     
+      <td>
+         <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you wnt to delete ?{{this.Name}}')">Delete</a>
+      </td>
+      </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>

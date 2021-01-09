@@ -1,0 +1,50 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="container mt-5 pl-5">
+                    <h2 class="text-center">Add User</h2>
+                    <form action="/admin/add-users" method="post" style="width: 27%;margin-left:37%">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="Name" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="Email" placeholder="Enter Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile</label>
+                            <input type="number" class="form-control" name="Mobile" placeholder="Mobile">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="Password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="Status" id="add-user" >
+                                    
+                                    <option value="Active">Active</option>
+                                    
+                                  <option value="Block">Block</option>
+
+                                </select>
+
+                            {{!-- <input type="text" class="form-control" name="Status" value="Active"> --}}
+                        </div> 
+
+                        {{!-- <a href="/login">Already have Account?</a>  --}}
+                        <button type="submit" class="btn btn-primary float-right">Add</button>
+
+                    </form>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section> 

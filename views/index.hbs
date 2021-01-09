@@ -1,0 +1,185 @@
+<!-- banner -->
+
+<!-- //banner -->
+<!-- welcome -->
+
+<!-- //welcome -->
+<!-- welcome-bottom -->
+<div class="welcome-bottom">
+	<div class="container">
+		<div class="wthree-welcome-bottom-grids">
+			<div class="col-md-6 wthree-welcome-bottom-left">
+				<h4>Mauris molestie ultrices molestie. Sed rhoncus interdum ipsum, id fermentum sem pellentesque ut.
+				</h4>
+				<p>Praesent egestas egestas felis, sit amet posuere massa malesuada eget. Phasellus sem urna, euismod
+					sit amet orci laoreet, laoreet molestie purus. Nulla leo purus, blandit nec efficitur tempor,
+					interdum vel enim. <span>Proin mauris mi, lobortis quis quam at, tristique dictum arcu. In lobortis,
+						massa in porta posuere, orci orci tincidunt risus, vitae ultrices enim eros vel
+						lacus.</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt tellus
+					at est fermentum ultricies. Cras cursus semper libero. Vivamus non elit a diam elementum vulputate
+					ac quis nisi. Suspendisse tellus massa, tempus in tristique a, eleifend non est. Duis consequat
+					facilisis laoreet. </p>
+			</div>
+			<div class="col-md-6 wthree-welcome-bottom-left">
+				<h4>Mauris molestie ultrices molestie. Sed rhoncus interdum ipsum, id fermentum sem pellentesque ut.
+				</h4>
+				<p>Praesent egestas egestas felis, sit amet posuere massa malesuada eget. Phasellus sem urna, euismod
+					sit amet orci laoreet, laoreet molestie purus. Nulla leo purus, blandit nec efficitur tempor,
+					interdum vel enim. <span>Proin mauris mi, lobortis quis quam at, tristique dictum arcu. In lobortis,
+						massa in porta posuere, orci orci tincidunt risus, vitae ultrices enim eros vel
+						lacus.</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt tellus
+					at est fermentum ultricies. Cras cursus semper libero. Vivamus non elit a diam elementum vulputate
+					ac quis nisi. Suspendisse tellus massa, tempus in tristique a, eleifend non est. Duis consequat
+					facilisis laoreet. </p>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- //welcome-bottom -->
+<!-- markets -->
+<div class="markets" id="markets">
+	<div class="container">
+		<div class="wthree-heading">
+			<h3>Our Services</h3>
+		</div>
+		<div class="markets-grids">
+
+			<section>
+				<div class="container mt-5">
+					<div class="row">
+						{{#each products}}
+
+						<div class="col-md-3">
+
+							<div class="card" style="width: 18rem;">
+								<img  style="width: 50px;height:50px" class="card-img-top" src="{{this.image}}" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">{{this.productname}}</h5>
+									<p class="card-text">{{this.category}}</p>
+									<h5 class="card-title">{{this.price}}</h5>
+									<a href="/add-to-cart" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+
+
+						</div>
+						
+
+						{{/each}}
+					</div>
+				</div>
+			</section>
+
+
+
+		</div>
+	</div>
+</div>
+<!-- //markets -->
+<!-- feedback -->
+<div class="jarallax feedback">
+	<div class="container">
+		<div class="wthree-heading feedback-heading">
+			<h3>Customer Feedback</h3>
+		</div>
+		<div class="agileits-feedback-grids">
+			<div id="owl-demo" class="owl-carousel owl-theme">
+				<div class="item">
+					<div class="feedback-info">
+						<div class="feedback-top">
+							<p> Sed semper leo metus, a lacinia eros semper at. Etiam sodales orci sit amet vehicula
+								pellentesque. </p>
+						</div>
+						<div class="feedback-grids">
+							<div class="feedback-img">
+								<img src="images/f1.jpg" alt="" />
+							</div>
+							<div class="feedback-img-info">
+								<h5>Peter Parker</h5>
+								<p>Vestibulum</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="feedback-info">
+						<div class="feedback-top">
+							<p> Sed semper leo metus, a lacinia eros semper at. Etiam sodales orci sit amet vehicula
+								pellentesque. </p>
+						</div>
+						<div class="feedback-grids">
+							<div class="feedback-img">
+								<img src="images/f2.jpg" alt="" />
+							</div>
+							<div class="feedback-img-info">
+								<h5>Mary Jane</h5>
+								<p>Vestibulum</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="feedback-info">
+						<div class="feedback-top">
+							<p> Sed semper leo metus, a lacinia eros semper at. Etiam sodales orci sit amet vehicula
+								pellentesque. </p>
+						</div>
+						<div class="feedback-grids">
+							<div class="feedback-img">
+								<img src="images/f3.jpg" alt="" />
+							</div>
+							<div class="feedback-img-info">
+								<h5>Steven Wilson</h5>
+								<p>Vestibulum</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="feedback-info">
+						<div class="feedback-top">
+							<p> Sed semper leo metus, a lacinia eros semper at. Etiam sodales orci sit amet vehicula
+								pellentesque. </p>
+						</div>
+						<div class="feedback-grids">
+							<div class="feedback-img">
+								<img src="images/f4.jpg" alt="" />
+							</div>
+							<div class="feedback-img-info">
+								<h5>Peter Parker</h5>
+								<p>Vestibulum</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //feedback -->
+<!-- newsletter -->
+<div class="jarallax newsletter">
+	<div class="container">
+		<div class="wthree-heading">
+			<h3>Subscribe Now</h3>
+		</div>
+	</div>
+	<div class="w3-agileits-newsletter">
+		<div class="subscribe-grid">
+			<form action="#" method="post">
+				<input type="text" placeholder="Subscribe" name="Subscribe" required="">
+				<button class="btn1"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- //newsletter -->
