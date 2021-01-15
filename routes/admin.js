@@ -10,13 +10,13 @@ const verifyLogin=(req,res,next)=>{
   if(req.session.loggedIn){
     next()
   }else{
-    res.redirect('/login')
+    res.redirect('admin/login')
   }
 }
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', verifyLogin,function (req, res, next) {
   // vendorsHelpers.getAllvendors().then((vendors)=>{
   //    console.log(vendors)
    res.render('admin/dashboard',{admin:true})
@@ -203,4 +203,8 @@ router.post('/edit-profile/:id',async(req,res)=>{
     console.log("name",admin_profile)
   })
 })
+router.get('/sales',async (req,res)=>{
+   let sales = await adminHelpers.getSalesReport();
+  res.render('admin/sales', {admin:true});
+});
 module.exports = router;

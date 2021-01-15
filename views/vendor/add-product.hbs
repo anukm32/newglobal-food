@@ -9,8 +9,11 @@
                         style="width: 27%;margin-left:37%">
 
                         <div class="form-group">
-                            <label for="">VendorName</label>
-                            <input type="text" name="Vendorname" class="form-control">
+                            {{!-- <label for="">VendorName</label> --}}
+                            {{!-- <input type="text" name="Vendorname" class="form-control"> --}}
+                            <input type="hidden" name="Vendor" class="form-control d-none" value="{{vendordetails.Name}}">
+                            <input type="hidden" name="VendorId" class="form-control d-none" value="{{vendordetails._id}}">
+
                         </div>
 
                         <div class="form-group">

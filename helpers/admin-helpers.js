@@ -185,5 +185,52 @@ module.exports={
                 
             })
         })
-    }
+    },
+    getSalesReport: () => {
+        return new Promise(async (resolve, reject) => {
+            sales = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $unwind: "$products",
+                },
+                {
+                    $match: { "products.status": "Delivered" },
+                },
+                {
+                    $sort: { date: -1 }
+                },
+                {
+                    $project: {
+                        orderId: "$_id",
+                        vendorId: "$products._id",
+                        price: "$products.totalPrice",
+                        date: { "$dateToString": { "format": "%d-%m-%Y", "date": "$date" } },
+                        paymentMethod: "$paymentMethod"
+                    },
+                },
+
+                {
+                    $lookup: {
+                        from: collections.VENDOR_COLLECTION,
+                        localField: "vendorId",
+                        foreignField: "_id",
+                        as: "vendor",
+                    },
+                },
+                {
+                    $project: {
+                        orderId: 1,
+                        vendorId: 1,
+                        price: 1,
+                        date: 1,
+                        paymentMethod: 1,
+                        vendorName: { $arrayElemAt: ["$vendor.Name", 0] },
+                    },
+                },
+
+
+            ]).toArray()
+            console.log("sales", sales);
+            resolve(sales)
+        })
+    },
 }

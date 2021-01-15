@@ -36,7 +36,7 @@ module.exports = {
 
         return new Promise(async (resolve, reject) => {
 
-            let vendors = await db.get().collection(collection.VENDOR_COLLECTION).find().toArray()
+            let vendors = await db.get().collection(collection.VENDOR_COLLECTION).find({ Status: "Active" }).toArray()
 
             resolve(vendors)
         })
@@ -58,6 +58,285 @@ module.exports = {
 
     },
 
+    getVendorsOrder: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let vendorOrder = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: { "products._id": objectId(vendorId) },
+              },
+              {
+                $sort: { date: -1 },
+              },
+              {
+                $project: {
+                  _id: 1,
+                  paymentMethod: 1,
+                  products: 1,
+                  date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },
+                  deliveryDetails: 1,
+                },
+              },
+            ])
+            .toArray();
+          console.log("vendorOrder", vendorOrder);
+          resolve(vendorOrder);
+        });
+      },
+      getOrderDetails: (orderId, vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let OrderDetails = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $match: { _id: objectId(orderId) },
+              },
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: { "products._id": objectId(vendorId) },
+              },
+            ])
+            .toArray();
+          console.log("vendorOrder", OrderDetails);
+          resolve(OrderDetails[0]);
+        });
+      },
+      updateOrderStatus: (orderId, status, vendorId) => {
+        return new Promise((resolve, reject) => {
+          db.get()
+            .collection(collection.ORDER_COLLECTION)
+            .updateOne(
+              {
+                _id: objectId(orderId),
+                "products._id": objectId(vendorId),
+              },
+              {
+                $set: { "products.$.status": status },
+              }
+            );
+        });
+      },
+    
+      getSalesReport: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let sales = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: {
+                  $and: [
+                    { "products._id": objectId(vendorId) },
+                    { "products.status": "Delivered" },
+                  ],
+                },
+              },
+              {
+                $sort: { date: -1 },
+              },
+              {
+                $project: {
+                  orderId: "$_id",
+                  vendorId: "$products._id",
+                  price: "$products.totalPrice",
+                  date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },
+                  paymentMethod: "$paymentMethod",
+                },
+              },
+            ])
+            .toArray();
+          console.log("sales", sales);
+          resolve(sales);
+        });
+      },
+    
+      getThisDaySalesReport: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let thisday = new Date().getUTCDate();
+          let thismonth = new Date().getMonth() + 1;
+          let thisyear = new Date().getFullYear();
+          console.log(thisday, thismonth, thisyear);
+          let thisDaySales = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: {
+                  $and: [
+                    { "products._id": objectId(vendorId) },
+                    { "products.status": "Delivered" },
+                  ],
+                },
+              },
+              {
+                $project: {
+                  _id: null,
+                  orderId: "$_id",
+                  day: { $dayOfMonth: "$date" },
+                  month: { $month: "$date" },
+                  year: { $year: "$date" },
+                  vendorId: "$products._id",
+                  price: "$products.totalPrice",
+                  date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },
+                  paymentMethod: "$paymentMethod",
+                },
+              },
+              {
+                $match: {
+                  $and: [
+                    { year: thisyear },
+                    { month: thismonth },
+                    { day: thisday },
+                  ],
+                },
+              },
+            ])
+            .toArray();
+          console.log("sales", thisDaySales);
+          resolve(thisDaySales);
+        });
+      },
+    
+    
+      //this is for last three days sales report for  chart
+      getDaySales: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let sales = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $sort: { date: -1 },
+              },
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: {
+                  $and: [
+                    { "products._id": objectId(vendorId) },
+                    { "products.status": "Delivered" },
+                  ],
+                },
+              },
+              {
+                $project: {
+                  toatlAmount: "$toatlAmount",
+                  date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },
+                },
+              },
+              {
+                $group: {
+                  _id: "$date",
+                  total: { $sum: "$toatlAmount" },
+                },
+              },
+              {
+                $limit: 3,
+              },
+            ])
+            .toArray();
+          console.log("", sales);
+          resolve(sales);
+        });
+      },
+      getThisMonthSalesReport: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let thismonth = new Date().getMonth() + 1;
+          let thisyear = new Date().getFullYear();
+          thisMonthSales = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: {
+                  $and: [
+                    { "products._id": objectId(vendorId) },
+                    { "products.status": "Delivered" },
+                  ],
+                },
+              },
+              {
+                $project: {
+                  _id: null,
+                  orderId: "$_id",
+                  month: { $month: "$date" },
+                  year: { $year: "$date" },
+                  vendorId: "$products._id",
+                  price: "$products.totalPrice",
+                  date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },
+                  paymentMethod: "$paymentMethod",
+                },
+              },
+              {
+                $match: { $and: [{ year: thisyear }, { month: thismonth }] },
+              },
+              {
+                $sort: { date: -1 },
+              },
+            ])
+            .toArray();
+          console.log("sales", thisMonthSales, "thisyear", thisyear);
+          resolve(thisMonthSales);
+        });
+      },
+    
+      //this is for last two month sales report  
+      monthlyWiseSales: (vendorId) => {
+        return new Promise(async (resolve, reject) => {
+          let monthlyWiseSales = await db
+            .get()
+            .collection(collection.ORDER_COLLECTION)
+            .aggregate([
+              {
+                $unwind: "$products",
+              },
+              {
+                $match: {
+                  $and: [
+                    { "products._id": objectId(vendorId) },
+                    { "products.status": "Delivered" },
+                  ],
+                },
+              },
+              {
+                $group: {
+                  _id: { $month: "$date" },
+                  total: { $sum: "$toatlAmount" },
+                },
+              },
+              {
+                $sort: { _id: -1 },
+              },
+              {
+                $limit: 2,
+              },
+            ])
+            .toArray();
+          console.log("monthlyWiseSales", monthlyWiseSales);
+          resolve(monthlyWiseSales);
+        });
+      },
+    
+    
+
     vendor_login: (vendor_data) => {
         return new Promise(async (resolve, reject) => {
             let loginStatus = false
@@ -73,6 +352,7 @@ module.exports = {
                         console.log("login success")
                         response.vendor = vendor
                         response.status = true
+                        console.log("vendor name",response.vendor);
                         resolve(response)
                     }
                     else {
@@ -96,6 +376,26 @@ module.exports = {
                 resolve(vendor)
             })
         })
+    },
+    updateProfile:(vendorId, vendorDetails) => {
+      return new Promise((resolve, reject) => {
+          db.get().collection(collection.VENDOR_COLLECTION).updateOne({ _id: objectId(vendorId) }, {
+              $set: {
+                  Name: vendorDetails.Name,
+                  Place: vendorDetails.Place,
+                   
+              }
+          }).then((response) => {
+              resolve(response)
+          })
+      })
+  },
+  
+    getVendorsDetail: (vendorId) => {
+      return new Promise(async (resolve, reject) => {
+          let VendorsDetail = await db.get().collection(collection.VENDOR_COLLECTION).find({ _id: objectId(vendorId) }).toArray()
+          resolve(VendorsDetail[0])
+      })
     },
     updateVendor: (vendorId, vendorDetails) => {
         return new Promise((resolve, reject) => {
@@ -131,13 +431,47 @@ module.exports = {
             })
         })
     },
-    getProfile: () => {
 
-        return new Promise(async (resolve, reject) => {
+    checkPassword:(vendorId,oldPassword)=>{
+      return new Promise (async(resolve,reject)=>{
+        let response={};
+        let admin = await db.get().collection(collection.VENDOR_COLLECTION)
+          .findOne({ _id: objectId(vendorId) });
+        if (admin) {
+          bcrypt.compare(oldPassword,admin.Password).then((status) => {
+            if (status) {
+             
+              response.status = true;
+              resolve(response);
+            } else {
+            
+              resolve({ status: false });
+            }
+          });
+        }else {
+          
+          resolve({ status: false });
+        }
+      })
+    },
+    resetPassword:(vendorId,newPassword)=>{
+      return new Promise (async(resolve ,reject)=>{
+       newPassword = await bcrypt.hash(newPassword, 10);
+        await db.get().collection(collection.VENDOR_COLLECTION).updateOne({_id:objectId(vendorId)}, {
+         $set: {
+             Password: newPassword
+         }
+       }).then()
+       resolve()
+      })
+    },
+    // getProfile: () => {
 
-            let profile = await db.get().collection(collection.VENDOR_PROFILE).find().toArray()
+    //     return new Promise(async (resolve, reject) => {
 
-            resolve(profile)
-        })
-    }
+    //         let profile = await db.get().collection(collection.VENDOR_PROFILE).find().toArray()
+
+    //         resolve(profile)
+    //     })
+    // }
 }

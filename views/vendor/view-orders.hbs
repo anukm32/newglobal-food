@@ -1,0 +1,410 @@
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+    @import url("/stylesheets/admin.css");
+
+    .navbar-nav>li>a.ordermanagement {
+        color: #e9ecef !important;
+        background: linear-gradient(90deg,
+                rgba(59, 125, 221, 0.1),
+                rgba(59, 125, 221, 0.0875) 50%,
+                transparent);
+        border-left: 4px solid #3b7ddd;
+    }
+
+
+
+
+    body {
+        padding-bottom: 3rem;
+        color: #5a5a5a;
+        background-color: #eee;
+    }
+
+    /* empty cart style */
+
+
+    .emptyCart .card {
+        margin-bottom: 30px;
+        border: 0;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        letter-spacing: .5px;
+        border-radius: 8px;
+        -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+        box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05)
+    }
+
+    .emptyCart .card .card-header {
+        background-color: #fff;
+        border-bottom: none;
+        padding: 24px;
+        border-bottom: 1px solid #f6f7fb;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px
+    }
+
+    .emptyCart .card-header:first-child {
+        border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+    }
+
+    .emptyCart .card .card-body {
+        padding: 30px;
+        background-color: transparent
+    }
+
+    .emptyCart .btn-primary,
+    .emptyCart .btn-primary.disabled,
+    .emptyCart .btn-primary:disabled {
+        background-color: #4466f2 !important;
+        border-color: #4466f2 !important
+    }
+
+    /* empty cart style */
+
+
+    /* cart style */
+
+
+
+    .card {
+        margin: auto;
+        max-width: 950px;
+        width: 90%;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 1rem;
+        border: transparent
+    }
+
+    @media(max-width:767px) {
+        .card {
+            margin: 3vh auto
+        }
+    }
+
+    .cart {
+
+        padding: 4vh 5vh;
+        border-bottom-left-radius: 1rem;
+        border-top-left-radius: 1rem;
+        color: #000;
+    }
+
+    @media(max-width:767px) {
+        .cart {
+            padding: 4vh;
+            border-bottom-left-radius: unset;
+            border-top-right-radius: 1rem
+        }
+    }
+
+    .summary {
+        background-color: #ddd;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 4vh;
+        color: rgb(65, 65, 65)
+    }
+
+    @media(max-width:767px) {
+        .summary {
+            border-top-right-radius: unset;
+            border-bottom-left-radius: 1rem
+        }
+    }
+
+    .summary .col-2 {
+        padding: 0
+    }
+
+    .summary .col-10 {
+        padding: 0
+    }
+
+    .row {
+        margin: 0
+    }
+
+    .title b {
+        font-size: 1.5rem
+    }
+
+    .main {
+        margin: 0;
+        padding: 2vh 0;
+        width: 100%
+    }
+
+    .col-2,
+    .col {
+        padding: 0 1vh
+    }
+
+    a {
+        padding: 0 1vh
+    }
+
+    .close {
+        margin-left: auto;
+        font-size: 0.7rem
+    }
+
+    img {
+        width: 3.5rem
+    }
+
+    .back-to-shop {
+        margin-top: 4.5rem
+    }
+
+    h5 {
+        margin-top: 4vh
+    }
+
+    hr {
+        margin-top: 1.25rem
+    }
+
+    form {
+        padding: 2vh 0
+    }
+
+    select {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1.5vh 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 1vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+
+    input:focus::-webkit-input-placeholder {
+        color: transparent
+    }
+
+
+
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        -webkit-user-select: none;
+        transition: none
+    }
+
+    .test {
+        width: 100%;
+        background: #fff;
+        padding: 5px;
+
+        border-radius: 10px;
+        margin-bottom: 0%;
+    }
+
+    #code {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center
+    }
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+
+.bbb_advs {
+    width: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px
+}
+
+.bbb_adv {
+    width: 100%;
+    height: 180px;
+    border: solid 1px #e8e8e8;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1)
+}
+
+.bbb_adv_content {
+    padding-left: 30px
+}
+
+.bbb_adv_subtitle {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 26px
+}
+
+.bbb_adv_title a {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000
+}
+
+.bbb_adv_title a:hover {
+    color: #0e8ce4
+}
+
+.bbb_adv_title_2 a {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0e8ce4
+}
+
+.bbb_adv_title_2 a:hover {
+    opacity: 0.8
+}
+
+.bbb_adv_text {
+    color: #828282;
+    margin-top: 10px;
+    font-size: 14px
+}
+
+.bbb_adv_image {
+    width: 178px;
+    height: 100%
+}
+
+.bbb_adv_image img {
+    display: block;
+    max-width: 100%
+}
+</style>
+<main>
+    <section>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-4 summary">
+                        <div>
+                            <h5><b>Summary</b></h5>
+                        </div>
+                        <hr>
+                        <div class="col" style="padding-left:0;">ORDER ID:{{order._id}}</div>
+                        <div class="col" style="padding-left:0;">PAYMENT:RS:{{order.products.totalPrice}}
+                            ({{order.paymentMethod}} )</div>
+                        <form id="update-form">
+                            <label for="sel1">Order Status</label>
+                            <select class="form-control" name="status" id="sel1">
+                                <option value="{{order.products.status}}">{{order.products.status}}</option>
+                                <option value="Accept">Accept</option>
+                                <option value="Dispatched">Dispatched</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                            <input type="text" name="orderId" id="" value="{{order._id}}" hidden>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit">UPDATE STATUS</button>
+                        </form>
+                        <div class="needs-validation">
+                            <div class="row g-3">
+                                <h4 class="mb-3">Billing address</h4>
+                                <div class="col-sm-12">
+                                    <label for="lastName" class="form-label">Name</label>
+                                    <p class=" test">{{order.deliveryDetails.FirstName}}
+                                        {{order.deliveryDetails.LastName}}</p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="firstName" class="form-label">Email</label>
+                                    <p class=" test">{{order.deliveryDetails.Email}}</p>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label for="lastName" class="form-label">Address</label>
+                                    <p class=" test">
+                                        {{order.deliveryDetails.Address}},{{order.deliveryDetails.Address2}},{{order.deliveryDetails.Zip}},
+                                    </p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="firstName" class="form-label">Mobile No</label>
+                                    <p class=" test">{{order.deliveryDetails.Mobile}},</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 cart">
+                        <div class="col-md-7 col-lg-12">
+                            <div class="row">
+                                <div class="bbb_advs">
+                                <div class="container">
+                                    <div class="row">
+                                        {{#each Orderproducts}}
+                                        <div class="col-lg-6 bbb_adv_col">
+                                            <!-- bbb_adv Item -->
+                                            <div
+                                                class="bbb_adv d-flex flex-row align-items-center justify-content-start">
+                                                <div class="bbb_adv_content">
+                                                    <div class="bbb_adv_title">{{this.product.Name}}</div>
+                                                    <div class="bbb_adv_text">Quantity:{{this.quantity}}</div>
+                                                </div>
+                                                <div class="ml-auto">
+                                                    <div class="bbb_adv_image"><img
+                                                            src="/product-images/{{this.item}}.jpg"
+                                                            alt=""></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/each}}
+                                       
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#update-form").submit((ev) => {
+            ev.preventDefault()
+            $.ajax({
+                url: '/vendor/changestatus',
+                data: $('#update-form').serialize(),
+                method: 'post',
+                success: (response) => {
+
+                    if (response === true) {
+
+                    } else {
+
+                    }
+                }
+            })
+        });
+    });
+    $("#bar").click(function () {
+        $(this).toggleClass("open");
+        $("#page-content-wrapper ,#sidebar-wrapper").toggleClass("toggled");
+    });
+    //
+    function toggleMenu() {
+        let navigation = document.querySelector(".navigation");
+        let toggle = document.querySelector(".toggle");
+
+        navigation.classList.toggle("active");
+        toggle.classList.toggle("active");
+    }
+</script>

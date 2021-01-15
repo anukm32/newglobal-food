@@ -37,7 +37,7 @@
 							{{!-- <li><a href="#">Contact</a></li> --}}
 							<li><a href="/cart">Cart<span class="badge badge-success">{{cartCount}}</span></a></li>
 							{{#if user}}
-							<li><a href="#">Orders</a></li>
+							<li><a href="/orders">Orders</a></li>
 							{{/if}}
 
 							
@@ -54,6 +54,7 @@
 
 									{{#if user}}
 									<li><a href="/logout">Logout</a></li>
+									<li><a href="/profile">Profile</a></li>
 									{{else}}
 									<li><a href="/login">Login</a></li>
 									{{/if}}

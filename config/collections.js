@@ -6,6 +6,6 @@ module.exports={
     CART_COLLECTION:'cart',
     ORDER_COLLECTION:'order',
     CATEGORY_COLLECTION:'category',
-    VENDOR_PROFILE:'vendorprofile',
+   
     ADMIN_PROFILE:'adminprofile'
 }

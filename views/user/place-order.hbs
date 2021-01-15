@@ -92,6 +92,7 @@
         rzp1.open();
     }
     function verifyPayment(payment, order) {
+        console.log(" verifyPayment", payment,order)
         $.ajax({
             url: '/verify-payment',
             data: {

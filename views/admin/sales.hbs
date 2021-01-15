@@ -1,0 +1,235 @@
+
+<div class="row">
+    <div class="container-fluid px-lg-4">
+        <div class="row">
+            <div class="col-md-12 mt-lg-4 mt-4">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">SALES REPORT</h1>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<div class=" container-fluid col-md-12 mt-4">
+    <div class="card container-fluid">
+        <div class="card-body">
+            <!-- title -->
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title">Sales</h4>
+                    <h5 class="card-subtitle">
+                        Overview of Sales
+                    </h5>
+                </div>
+                <div class="ml-auto">
+                    <div class="dl">
+                        <select class="custom-select" onChange="myFunction(this.options[this.selectedIndex].value)">
+                            <option value="All" selected="">All</option>
+                            <option value="Today">Today</option>
+                            <option value="ThisMonth">This Month</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- title -->
+        </div>
+        <div class="table-responsive ">
+            <table class="table v-middle" id="sales_table">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="border-top-0">ORDER ID</th>
+                        <th class="border-top-0">DATE</th>
+                        <th class="border-top-0">PRICE</th>
+                        <th class="border-top-0">PAYMENT METHOD</th>
+                        <th class="border-top-0">VENDOR NAME</th>
+                    </tr>
+                </thead>
+                <tbody id="salestable">
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">BEST SELLING PRODUCTS</h5>
+                    <div class="salesreport">
+                        <canvas id="myChart1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">SALES</h5>
+                    <div class="salesreport">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<script>
+    $("#bar").click(function () {
+        $(this).toggleClass("open");
+        $("#page-content-wrapper ,#sidebar-wrapper").toggleClass("toggled");
+    });
+    //
+    function toggleMenu() {
+        let navigation = document.querySelector(".navigation");
+        let toggle = document.querySelector(".toggle");
+
+        navigation.classList.toggle("active");
+        toggle.classList.toggle("active");
+    }
+
+    let labels
+    let data
+    let label1
+    let data1
+    let salesReport
+
+    $(document).ready(function () {
+        console.log("test api call")
+        $.ajax({
+            url: '/admin/salesdata',
+            method: 'get',
+            success: (response) => {
+                if (response) {
+                    labels = response.labels
+                    data = response.data
+                    label1 = response.label1
+                    data1 = response.data1
+                    salesReport = response.salesReport
+                    chart(), table(salesReport)
+
+
+                }
+
+
+            }
+        })
+
+    });
+
+    function myFunction(chosen) {
+        console.log(chosen);
+        $.ajax({
+            url: '/admin/salesfilter/'+chosen,
+            method: 'get',
+            success: (response) => {
+                if (response) {
+                    salesReport = response.salesReport
+                    table(salesReport)
+
+
+                }
+
+
+            }
+        })
+    };
+    
+
+    function table(salesReport) {
+        let table = document.getElementById("salestable")
+        table.innerHTML =""
+        for (var i = 0; i < salesReport.length; i++) {
+            var row = `<tr>
+                      <td>${salesReport[i].date}</td>
+                      <td>${salesReport[i].orderId}</td>
+                      <td>${salesReport[i].price}</td>
+                      <td>${salesReport[i].paymentMethod}</td>
+                      <td>${salesReport[i].vendorName}</td>
+                   </tr>`
+
+            table.innerHTML += row
+        }
+
+    };
+
+    function chart() {
+
+        let color1 = ["#49A9EA", "#36CAAB", "#49EA", "#36CAAB"];
+
+        let mychart1 = document.getElementById("myChart1").getContext("2d");
+        let chart1 = new Chart(mychart1, {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: data,
+                        backgroundColor: color1,
+                    },
+                ],
+            },
+            options: {
+                // title:{
+                //     text:"do you like ",
+                //     fontColor: 'black',
+                //     display:true
+                // },
+                legend: {
+                    labels: {
+                        fontColor: "black",
+                        fontNumber: 30,
+                    },
+                },
+            },
+        });
+
+
+        let color2 = ["#49A9EA", "#36CAAB"];
+
+        let mychart2 = document.getElementById("myChart2").getContext("2d");
+        let chart2 = new Chart(mychart2, {
+            type: "pie",
+            data: {
+                labels: label1,
+                datasets: [
+                    {
+                        data: data1,
+                        backgroundColor: color2,
+                    },
+                ],
+            },
+            options: {
+                // title:{
+                //     text:"do you like ",
+                //     fontColor: 'black',
+                //     display:true
+                // },
+                legend: {
+                    labels: {
+                        fontColor: "black",
+                        fontNumber: 30,
+                    },
+                },
+            },
+        });
+
+    }
+
+
+
+
+</script>
