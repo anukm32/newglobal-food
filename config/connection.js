@@ -6,6 +6,9 @@ const state={
 module.exports.connect=function(done){
     const url='mongodb+srv://new-user:anukm123456@newcluster.lt93r.mongodb.net/test'
     const dbname='db01'
+    // const url='mongodb://localhost:27017'
+    // const dbname='homechef'
+    
 
 
 mongoClient.connect(url,(err,data)=>{
