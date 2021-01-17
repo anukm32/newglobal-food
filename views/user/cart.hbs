@@ -29,6 +29,9 @@
                             onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)"> + </button>
                     </td>
                    
+                  
+
+
                 </tr>
                 {{/each}}
             </tbody>
@@ -68,5 +71,25 @@
 
             }
         })
-    }
+    };
+    function removeCartProduct(userId, proId, vendorId,) {
+            console.log('test ')
+            $.ajax({
+                url: '/removeCartItem',
+                data: {
+                    vendorId: vendorId,
+                    product: proId,
+                    user: userId
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.removeProduct) {
+                        alert("product removed from cart")
+                        location.reload()
+
+                    }
+
+                }
+            })
+        }
 </script>

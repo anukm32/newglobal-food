@@ -99,72 +99,56 @@ router.get('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.post("/otpLogin", (req, res) => {
-  const CountryCode = "+91";
-  let number = req.body.MobileNumber;
-  const MobileNumber = CountryCode + number;
-
-  userHelpers.doMobileValidation(MobileNumber).then((response) => {
-    console.log("number",number);
-    console.log("do mobile", response);
-    if (response.available) {
-      console.log("do mobile if")
-      client.verify
-        .services(config.serviceID)
-        .verifications.create({
-          to: MobileNumber,
-          // to:number,
-          channel: "sms",
-        })
-        .then((data) => {
-          // save mobile no
-          req.session.mobileno = MobileNumber
-
-          console.log("doMobileValidation client verify", data);
-          res.status(200);
-          res.redirect("/login");
-
-        }).catch((err) => {
-          console.log("doMobileValidation client verify cstch", err);
-
-        })
-    } else {
-      res.send("Number is not available");
-    }
-  })
+router.get("/forgot_password",(req,res)=>{
+  res.render("user/forgot_password")
 })
-router.post('/verifyotp', (req, res) => {
-  const mobileno = req.session.mobileno
-  const otp = req.body.otp
-  // console.log("aftermob.", req.body)
-  console.log("verify otp", mobileno);
-  // client.verify.services(config.serviceID).verifications
-  //   .create({
-  //     to: mobileno,
-  //     code: otp
-  //   }).then((data) => {
-  //     console.log("data", data);
-  //     res.status(200);
-  //     res.redirect("/");
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  userHelpers.doVerifyOtp(mobileno,otp).then((response)=>{
+
+router.get("/otplogin",(req,res)=>{
+  res.render("user/otplogin")
+})
+
+router.post("/otpLogin", (req, res) => {
+  MobileNumber =  req.body.MobileNumber;
+  console.log("mobile", MobileNumber);
+  userHelpers.doMobileValidation(MobileNumber).then((response) => {
+    console.log("response",response);
+    if (response.available) {
+      console.log("mobile", MobileNumber)
+      userHelpers.doSendOtp(MobileNumber).then((response)=>{
+        console.log(response);
+        res.status(200);
+        res.json(response.Status)
+      })
+    } else {
+      res.json(response)
+    }
+  });
+});
+
+router.post("/verifyotp", (req, res) => {
+  MobileNumber = req.body.mobileno, 
+  Otp = req.body.Otp;
+  console.log(MobileNumber, Otp);
+  userHelpers.doVerifyOtp(MobileNumber,Otp).then((response)=>{
     console.log("response",response);
     if(response.status){
       if(response.user.Status=="Active"){
-        req.session.loggedIn = true;
-        req.session.user=response.user;
-        console.log("ready",req.session.user);
-        res.redirect("/");
+        req.session.userLoggedIn = true;
+       req.session.user = response.user;
+       console.log("ready",req.session.user);
+       res.redirect("/");
       }else{
-        req.session.statusErr=true;
+        req.session.statusErr = true;
         req.session.destroy();
-        res.redirect("/login")
+        res.redirect("/login");
       }
-    }
+    } 
+    
   })
-})
+  
+});
+
+
 router.get('/cart', verifyLogin, async (req, res) => {
   let products = await userHelpers.getCartProducts(req.session.user._id)
   let totalValue = await userHelpers.getTotalAmount(req.session.user._id)
@@ -190,6 +174,13 @@ router.post('/change-product-quantity', (req, res, next) => {
   })
 
 })
+router.post("/removeCartItem", verifyLogin, async (req, res) => {
+  console.log("remodecartItem",req.body);
+  await userHelpers.removeCartItem(req.body).then(async (response) => {
+    response.total = await userHelpers.getTotalAmount(req.session.user._id);
+    res.json(response);
+  });
+});
 router.get('/place-order', verifyLogin, async (req, res) => {
 
   let total = await userHelpers.getTotalAmount(req.session.user._id)

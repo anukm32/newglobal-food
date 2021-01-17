@@ -59,62 +59,88 @@ module.exports = {
             }
         })
     },
+  
+
     doMobileValidation: (mobile) => {
+        console.log(mobile);
         return new Promise(async (resolve, reject) => {
-            const CountryCode="+91";
-            let user = await db.get().collection(collection.USER_COLLECTION).findOne({ Mobile :mobile })
-            console.log("mobile",mobile);
-           
-            console.log("user",user)
-            
-            if (user) {
-
-                resolve({ available: true })
-            } else {
-                resolve({ available: false })
-            }
+          let user = await db.get().collection(collection.USER_COLLECTION)
+            .findOne({ Mobile: mobile })
+          if (user) {
+            console.log(user);
+            resolve({ available: true });
+          } else {
+            resolve({ available: false });
+          }
+    
         })
-
-    },
-    doVerifyOtp: (mobileno, otp) => {
+      },
+      doSendOtp: (MobileNumber) => {
         return new Promise(async (resolve, reject) => {
-            console.log("mobile.....doVerifyotp",mobileno)
-            console.log("otp",otp)
-           
-            // let response = {}
-            let user = await db.get().collection(collection.USER_COLLECTION).findOne({Mobile : mobileno })
-           
-            console.log("user",user);
-            
-            if (user) {
-                client.verify.services(config.serviceID).verifications
-                    .create({
-                        to: mobileno,
-                        code: otp
-                    }).then((data) => {
-                        console.log("data", data);
-                        console.log(data.status);
-                        if (data.status === "Active") {
-                            console.log("login success");
-                            response.user = user
-                            response.status = true
-                            console.log(response.user, response.status)
-                            resolve(response);
-
-                        } else {
-                            console.log("login failed")
-                            resolve({ status: false });
-                        }
-
-                    }).catch((err) => {
-                        console.log(err);
-                    })
-
-            }
-
+          client.verify
+            .services("VA8cd480f75d3e7d3f45949aa50a1f305f")
+            .verifications.create({
+              to: MobileNumber,
+              channel: "sms",
+            })
+            .then((response) => {
+              console.log(response);
+              resolve(response)
+    
+            });
         })
-
-    },
+      },
+  
+    doVerifyOtp: (mobileno, Otp) => {
+        return new Promise(async (resolve, reject) => {
+    
+          let response = {};
+          let user = await db.get().collection(collections.USER_COLLECTION)
+            .findOne({ Mobile: mobileno });
+          console.log(user);
+          if (user) {
+            client.verify
+              .services("VA9c0ce9c2c2ac54d32e71606306e8ec55")
+              .verificationChecks
+              .create({
+                to: mobileno,
+                code: Otp
+              }).then((data) => {
+                console.log(data.status);
+                if (data.status === "approved") {
+                  console.log("login success");
+                  response.user = user;
+                  response.status = true;
+                  console.log(response.user, response.status)
+                  resolve(response);
+                } else {
+                  console.log("login failed 1");
+                  resolve({ status: false });
+                }
+              });
+          }
+    
+        })
+      },
+    
+    removeCartItem: (details) => {
+        db.get().collection(collection.CART_COLLECTION)
+          .updateOne(
+            {
+              "user": objectId(details.user)
+            },
+            {
+              $pull: { "cart.$[v].cartItems": { item: objectId(details.product) } }
+    
+            },
+            {
+              arrayFilters: [{ "v.vendorId": objectId(details.vendorId), }], multi: true
+            }
+          ).then((response) => {
+            resolve({ removeProduct: true });
+          })
+      },
+    
     addToCart: (proId, userId) => {
         let proObj = {
             item: objectId(proId),
